@@ -32,11 +32,9 @@ void setup()
     FastLED.setMaxPowerInVoltsAndMilliamps(5, MAX_DRAW_MA);
     set_max_power_indicator_LED(LED_BUILTIN);
 
-
     delay(200); // Give the monitor time to start up
     gPatternIndex = analogRead(A0) % 2;
     FastLED.clear(true);
-
 }
 
 void loop()
@@ -49,9 +47,6 @@ void loop()
     default:
         runOrangePulse(leds);
         break;
-    // default:
-    //     fill_solid(leds, NUM_LEDS, CHSV(beatsin8(30,0,255), 255, 0));
-    //     break;
     }
     FastLED.show();
 }
