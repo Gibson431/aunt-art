@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <EEPROM.h>
 #include <FastLED.h>
 #include <OneButton.h>
 
@@ -11,7 +12,7 @@
 #define NUM_LEDS 56
 #define MAX_DRAW_MA 1000 // Max power draw in mA
 
-#define NUM_PATTERNS 5
+#define NUM_PATTERNS 2
 
 #include "include/Fire.h"
 #include "include/Orange-Pulse.h"
@@ -23,6 +24,11 @@ byte gPatternIndex = 0;
 
 void setup()
 {
+    int addr = 0;
+    byte lastPattern = EEPROM.read(addr);
+    gPatternIndex = (lastPattern + 1) % NUM_PATTERNS;
+    EEPROM.write(addr, gPatternIndex);
+    
     // Power indicator
     pinMode(LED_BUILTIN, OUTPUT);
 
@@ -33,7 +39,6 @@ void setup()
     set_max_power_indicator_LED(LED_BUILTIN);
 
     delay(200); // Give the monitor time to start up
-    gPatternIndex = analogRead(A0) % 2;
     FastLED.clear(true);
 }
 
