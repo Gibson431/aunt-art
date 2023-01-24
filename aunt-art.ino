@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <EEPROM.h>
 #include <FastLED.h>
-#include <OneButton.h>
 
 // Digital Pins
 #define DIGITAL_SENSOR_PIN 6 // Sensor digital pin
